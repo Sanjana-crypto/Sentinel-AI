@@ -750,7 +750,7 @@ st.markdown(
         <p class="hero-subtitle">Multi-Agent Cyber Investigation System</p>
         <div>
             <span class="api-badge" style="background-color: rgba(0, 212, 255, 0.15); color: #00d4ff; border: 1px solid #00d4ff;">
-                v1.0 • Powered by Google ADK
+                Powered by Google ADK • Groq LLM • Threat Intelligence APIs
             </span>
         </div>
         <hr class="hero-divider">
