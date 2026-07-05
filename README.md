@@ -64,7 +64,12 @@ User Input (Email / URL)
 ### Tech Stack
 
 ```
-Backend:    Google ADK 2.0 + Groq (LLaMA/Mixtral)
+AI Framework : Google ADK 2.0
+Inference     : Groq LLM (Llama 3.3 / Mixtral)
+Threat Intel  : VirusTotal, AbuseIPDB, Google Safe Browsing
+Frontend      : Streamlit
+Deployment    : Streamlit Cloud + Docker
+Language      : Python
 Agents CLI: google-agents-cli (scaffold, lint, test)
 MCP Tools:  VirusTotal API, AbuseIPDB API, Google Safe Browsing API
 UI:         Streamlit (dark cyber SOC dashboard theme)
