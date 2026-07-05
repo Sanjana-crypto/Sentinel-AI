@@ -221,9 +221,10 @@ sentinel-ai/
 
 ---
 
-## 🏆 Submission
+Developed as part of:
 
-- **Competition:** Google Cloud Gen AI Academy APAC — Cohort 2, Track 2
+• Kaggle AI Agents Intensive Capstone 2026
+• Google Cloud Gen AI Academy APAC – Cohort 2
 
 ---
 
