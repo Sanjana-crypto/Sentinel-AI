@@ -221,10 +221,11 @@ sentinel-ai/
 
 ---
 
-Developed as part of:
+## 🏆 Developed as Part of
 
-• Kaggle AI Agents Intensive Capstone 2026
-• Google Cloud Gen AI Academy APAC – Cohort 2
+- **Kaggle AI Agents Intensive Capstone 2026**
+- **Google Cloud Gen AI Academy APAC – Cohort 2**
+
 
 ---
 
