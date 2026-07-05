@@ -10,8 +10,8 @@
 
 **An autonomous multi-agent AI system that investigates phishing emails and suspicious URLs in seconds — protecting users from cyber threats using collaborative AI agents.**
 
-• [🚀 Live Demo](https://sentinel-ai-sanjana.streamlit.app/) • [📹 Demo Video](https://youtu.be/W9nowQh8iSw)  • [📊 Architecture](#️-architecture)
-
+• [🚀 Live Demo](https://sentinel-ai-sanjana.streamlit.app/) • [📹 Demo Video](https://youtu.be/W9nowQh8iSw) • [📊 Architecture](#️-architecture)
+• [📂 GitHub Repository](https://github.com/Sanjana-crypto/Sentinel-AI)
 </div>
 
 ---
