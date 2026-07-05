@@ -132,10 +132,20 @@ Open `http://localhost:8501` in your browser.
 ## 📸 Screenshots
 
 ### Dashboard
-![Dashboard](screenshots/dashboard.png)
+![Dashboard](dashboard.png)
 
-### Investigation Results
-![Results](screenshots/results.png)
+### Agent Timeline
+![Timeline](Agent_Timeline.png)
+
+### Final Result
+![Result](Result.png)
+
+### Email Analysis
+![Email Analysis](Email_analysis.png)
+
+### SOC Report
+![SOC Report](SOC_Report.png)
+
 
 ---
 
