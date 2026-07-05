@@ -1,86 +1,235 @@
-# sentinel-ai
+# 🛡️ SentinelAI — Multi-Agent Cyber Investigation System
 
-Simple ReAct agent
-Agent generated with `agents-cli` version `0.5.1`
+<div align="center">
 
-## Project Structure
+![SentinelAI Banner](https://img.shields.io/badge/SentinelAI-v1.0-00d4ff?style=for-the-badge&logo=shield&logoColor=white)
+![Google ADK](https://img.shields.io/badge/Google_ADK-2.0-4285F4?style=for-the-badge&logo=google&logoColor=white)
+![Groq](https://img.shields.io/badge/Groq-LLM_Powered-F55036?style=for-the-badge&logoColor=white)
+![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)
+![Python](https://img.shields.io/badge/Python-3.10+-3776AB?style=for-the-badge&logo=python&logoColor=white)
 
-```
-sentinel-ai/
-├── app/         # Core agent code
-│   ├── agent.py               # Main agent logic
-│   └── app_utils/             # App utilities and helpers
-├── tests/                     # Unit, integration, and load tests
-├── GEMINI.md                  # AI-assisted development guide
-└── pyproject.toml             # Project dependencies
-```
+**An autonomous multi-agent AI system that investigates phishing emails and suspicious URLs in seconds — protecting users from cyber threats using collaborative AI agents.**
 
-> 💡 **Tip:** Use [Gemini CLI](https://github.com/google-gemini/gemini-cli) for AI-assisted development - project context is pre-configured in `GEMINI.md`.
+[🚀 Live Demo](https://sentinel-ai-sanjana.streamlit.app/) • [📹 Demo Video](#) • [📊 Architecture](#architecture)
 
-## Requirements
-
-Before you begin, ensure you have:
-- **uv**: Python package manager (used for all dependency management in this project) - [Install](https://docs.astral.sh/uv/getting-started/installation/) ([add packages](https://docs.astral.sh/uv/concepts/dependencies/) with `uv add <package>`)
-- **agents-cli**: Agents CLI - Install with `uv tool install google-agents-cli`
-- **Google Cloud SDK**: For GCP services - [Install](https://cloud.google.com/sdk/docs/install)
-
-
-## Quick Start
-
-Install `agents-cli` and its skills if not already installed:
-
-```bash
-uvx google-agents-cli setup
-```
-
-Install required packages:
-
-```bash
-agents-cli install
-```
-
-Test the agent with a local web server:
-
-```bash
-agents-cli playground
-```
-
-You can also use features from the [ADK](https://adk.dev/) CLI with `uv run adk`.
-
-## Commands
-
-| Command              | Description                                                                                 |
-| -------------------- | ------------------------------------------------------------------------------------------- |
-| `agents-cli install` | Install dependencies using uv                                                         |
-| `agents-cli playground` | Launch local development environment                                                  |
-| `agents-cli lint`    | Run code quality checks                                                               |
-| `agents-cli eval`    | Evaluate agent behavior (generate, grade, analyze, and more — see `agents-cli eval --help`) |
-| `uv run pytest tests/unit tests/integration` | Run unit and integration tests                                                        |
-
-## 🛠️ Project Management
-
-| Command | What It Does |
-|---------|--------------|
-| `agents-cli scaffold enhance` | Add CI/CD pipelines and Terraform infrastructure |
-| `agents-cli infra cicd` | One-command setup of entire CI/CD pipeline + infrastructure |
-| `agents-cli scaffold upgrade` | Auto-upgrade to latest version while preserving customizations |
+</div>
 
 ---
 
-## Development
+## 🎯 Problem Statement
 
-Edit your agent logic in `app/agent.py` and test with `agents-cli playground` - it auto-reloads on save.
+Phishing attacks cost organizations **$17,700 every minute** globally. SOC analysts spend **2-3 hours manually** investigating each suspicious email — checking headers, analyzing URLs, cross-referencing threat databases, and writing reports.
 
-## Deployment
+**SentinelAI reduces this to under 30 seconds.**
 
-```bash
-gcloud config set project <your-project-id>
-agents-cli deploy
+---
+
+## ✨ What SentinelAI Does
+
+Paste a suspicious email or URL → 6 specialized AI agents collaborate → Full SOC investigation report generated automatically.
+
+```
+User Input (Email / URL)
+         ↓
+  [Orchestrator Agent]  ← Master coordinator
+         ↓
+  [Email Analyzer]      ← SPF, DKIM, DMARC, urgency detection
+         ↓
+  [URL Investigator]    ← Domain age, SSL, redirect chains
+         ↓
+  [IOC Extractor]       ← VirusTotal, AbuseIPDB, Safe Browsing
+         ↓
+  [Threat Assessor]     ← Risk scoring & classification
+         ↓
+  [Report Generator]    ← Professional SOC markdown report
 ```
 
-To add CI/CD and Terraform, run `agents-cli scaffold enhance`.
-To set up your production infrastructure, run `agents-cli infra cicd`.
+**Output:** Risk score, threat classification, IOC table, actionable recommendations.
 
-## Observability
+---
 
-Built-in telemetry exports to Cloud Trace, BigQuery, and Cloud Logging.
+## 🏗️ Architecture
+
+### Multi-Agent Pipeline (Google ADK 2.0)
+
+| Agent | Role | Output |
+|-------|------|--------|
+| 🎯 **Orchestrator** | Routes and coordinates investigation | Investigation plan |
+| 📧 **Email Analyzer** | Parses headers, checks auth, detects impersonation | Structured EmailAnalysis schema |
+| 🔗 **URL Investigator** | Checks domain reputation, redirects, SSL | URL risk findings |
+| 🔍 **IOC Extractor** | Queries VirusTotal, AbuseIPDB, Safe Browsing | IOC table |
+| ⚠️ **Threat Assessor** | Computes final risk: Low/Medium/High/Critical | Risk level + justification |
+| 📄 **Report Generator** | Compiles professional SOC report | Markdown SOC report |
+
+### Tech Stack
+
+```
+Backend:    Google ADK 2.0 + Groq (LLaMA/Mixtral)
+Agents CLI: google-agents-cli (scaffold, lint, test)
+MCP Tools:  VirusTotal API, AbuseIPDB API, Google Safe Browsing API
+UI:         Streamlit (dark cyber SOC dashboard theme)
+Security:   Input sanitization, .env API keys, rate limiting, audit logging
+Deploy:     Streamlit Cloud + Docker
+IDE:        Google Antigravity IDE (vibe coding)
+```
+
+---
+
+## 🚀 Quick Start
+
+### Prerequisites
+- Python 3.10+
+- `uv` package manager
+- API keys (see below)
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/Sanjana-crypto/Sentinel-AI.git
+cd Sentinel-AI
+
+# Install dependencies
+uv sync
+
+# Set up environment variables
+cp .env.example .env
+# Edit .env with your API keys
+```
+
+### Environment Variables
+
+Create a `.env` file:
+
+```env
+GROQ_API_KEY=gsk_...                # Groq Console (free)
+VIRUSTOTAL_API_KEY=...             # VirusTotal (free tier)
+ABUSEIPDB_API_KEY=...              # AbuseIPDB (free tier)
+SAFE_BROWSING_API_KEY=...          # Google Safe Browsing (free)
+```
+
+### Run Locally
+
+```bash
+uv run streamlit run app/streamlit_app.py
+```
+
+Open `http://localhost:8501` in your browser.
+
+---
+
+## 🔐 Security Features
+
+- ✅ **Input Sanitization** — strips null bytes, prevents injection attacks
+- ✅ **Token overflow protection** — inputs truncated at 50,000 characters
+- ✅ **API key management** — all keys via `.env`, never hardcoded
+- ✅ **Error handling callbacks** — graceful fallback on model failures
+- ✅ **Rate limiting** — prevents API abuse
+- ✅ **Audit logging** — all investigations logged with timestamp
+
+---
+
+## 📸 Screenshots
+
+### Dashboard
+![Dashboard](screenshots/dashboard.png)
+
+### Investigation Results
+![Results](screenshots/results.png)
+
+---
+
+## 🧪 Running Tests
+
+```bash
+# Run all unit tests
+uv run pytest tests/unit
+
+# Run with coverage
+uv run pytest tests/ --cov=app
+
+# Lint check
+uvx --from google-agents-cli agents-cli lint
+```
+
+---
+
+## 🐳 Docker Deployment
+
+```bash
+# Build image
+docker build -t sentinel-ai .
+
+# Run container
+docker run -p 8501:8501 --env-file .env sentinel-ai
+```
+
+---
+
+## 📋 Course Concepts Demonstrated
+
+| Concept | Implementation |
+|---------|---------------|
+| ✅ **Multi-Agent System (ADK)** | 6 specialized agents in sequential workflow |
+| ✅ **MCP Server** | VirusTotal, AbuseIPDB, Safe Browsing tools |
+| ✅ **Antigravity IDE** | Built entirely using Google Antigravity vibe coding |
+| ✅ **Security Features** | Input sanitization, .env keys, rate limiting |
+| ✅ **Deployability** | Streamlit Cloud + Docker |
+| ✅ **Agent Skills** | investigate_email, analyze_url, extract_iocs, generate_report |
+
+---
+
+## 🗂️ Project Structure
+
+```
+sentinel-ai/
+├── app/
+│   ├── agent.py              # Core ADK multi-agent workflow
+│   ├── mcp_tools.py          # MCP tool integrations (VirusTotal, etc.)
+│   ├── streamlit_app.py      # Streamlit SOC dashboard UI
+│   └── app_utils/
+│       └── telemetry.py      # Logging & monitoring
+├── tests/
+│   ├── unit/                 # Unit tests for each agent
+│   ├── integration/          # Integration tests
+│   └── eval/                 # Evaluation datasets
+├── CONTEXT.md                # Coding standards & project context
+├── Dockerfile                # Container deployment
+├── pyproject.toml            # Dependencies (uv)
+└── agents-cli-manifest.yaml  # agents-cli configuration
+```
+
+---
+
+## 🎯 The Antigravity Moment
+
+> A security analyst manually investigating a phishing email takes **2-3 hours** — checking email headers, querying threat databases, analyzing URLs, writing reports.
+>
+> **SentinelAI does this in under 30 seconds.**
+>
+> That's the power of multi-agent AI.
+
+---
+
+## 🏆 Submission
+
+- **Competition:** Google Cloud Gen AI Academy APAC — Cohort 2, Track 2
+
+---
+
+## 👩‍💻 Author
+
+**Sanjana** — [@Sanjana-crypto](https://github.com/Sanjana-crypto)
+
+Built with ❤️ using Google ADK 2.0 + Antigravity IDE
+
+---
+
+<div align="center">
+
+**SentinelAI — Protecting users from cyber threats, one investigation at a time.**
+
+![Made with ADK](https://img.shields.io/badge/Made_with-Google_ADK_2.0-4285F4?style=flat-square&logo=google)
+![Powered by Groq](https://img.shields.io/badge/Powered_by-Groq-F55036?style=flat-square&logo=google)
+
+</div>
