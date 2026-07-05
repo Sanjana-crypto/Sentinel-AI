@@ -244,16 +244,4 @@ Built with ❤️ using Google ADK 2.0 + Antigravity IDE
 
 </div>
 
-# 📸 SentinelAI Screenshots
 
-| Dashboard | Email Analysis |
-|------------|----------------|
-| ![](dashboard.png) | ![](Email_analysis.png) |
-
-| Agent Timeline | Investigation Report |
-|----------------|----------------------|
-| ![](Agent_Timeline.png) | ![](SOC_Report.png) |
-
-| Final Result |
-|--------------|
-| ![](Result.png) |
