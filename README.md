@@ -61,24 +61,47 @@ User Input (Email / URL)
 | ⚠️ **Threat Assessor** | Computes final risk: Low/Medium/High/Critical | Risk level + justification |
 | 📄 **Report Generator** | Compiles professional SOC report | Markdown SOC report |
 
-### Tech Stack
+## 🛠️ Tech Stack
 
-```
-AI Framework : Google ADK 2.0
-Inference     : Groq LLM (Llama 3.3 / Mixtral)
-Threat Intel  : VirusTotal, AbuseIPDB, Google Safe Browsing
-Frontend      : Streamlit
-Deployment    : Streamlit Cloud + Docker
-Language      : Python
-Agents CLI: google-agents-cli (scaffold, lint, test)
-MCP Tools:  VirusTotal API, AbuseIPDB API, Google Safe Browsing API
-UI:         Streamlit (dark cyber SOC dashboard theme)
-Security:   Input sanitization, .env API keys, rate limiting, audit logging
-Deploy:     Streamlit Cloud + Docker
-IDE:        Google Antigravity IDE (vibe coding)
-```
+```text
+AI Framework  : Google ADK 2.0
+Inference     : Groq LLM (Llama 3.3 70B / Mixtral)
+Language       : Python 3.10+
 
----
+Frontend       : Streamlit (Cyber SOC Dashboard)
+Backend         : Python + Google ADK Multi-Agent Workflow
+
+Threat Intel   : VirusTotal API
+                 AbuseIPDB API
+                 Google Safe Browsing API
+
+Multi-Agent    : Orchestrator Agent
+                 Email Analyzer
+                 URL Investigator
+                 IOC Extractor
+                 Threat Assessor
+                 Report Generator
+
+Agents CLI     : google-agents-cli
+
+Deployment     : Streamlit Cloud
+                 Docker
+
+Configuration  : python-dotenv
+                 .env Secret Management
+
+Security        : Input Sanitization
+                  API Key Management
+                  Rate Limiting
+                  Audit Logging
+                  Exception Handling
+
+Testing         : Pytest
+
+IDE             : Google Antigravity IDE (Vibe Coding)
+
+Version Control : Git + GitHub
+```
 
 ## 🚀 Quick Start
 
