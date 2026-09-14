@@ -35,6 +35,7 @@ def is_valid_ip(target: str) -> bool:
 
 
 def check_virustotal_reputation(target: str) -> dict[str, Any]:
+    print("🔥 VIRUSTOTAL FUNCTION CALLED")
     """Check the security reputation of a URL or IP address using the VirusTotal v3 API.
 
     Args:

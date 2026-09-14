@@ -8,11 +8,11 @@ from google.adk.models.llm_request import LlmRequest
 from google.genai import types
 
 class GroqLLM(BaseLlm):
-    model: str = "llama-3.3-70b-versatile"
+    model: str = os.environ.get("GROQ_MODEL", "openai/gpt-oss-120b")
 
     @classmethod
     def supported_models(cls) -> list[str]:
-        return ["llama.*", "gemma.*", "mixtral.*"]
+        return ["llama.*", "gemma.*", "mixtral.*", "openai/gpt-oss.*", "qwen.*"]
 
     async def generate_content_async(
         self, llm_request: LlmRequest, stream: bool = False
@@ -85,41 +85,66 @@ class GroqLLM(BaseLlm):
                             }
                         })
 
-        # Ensure no tool_calls are passed without tools defined (edge cases)
+                # Ensure no tool_calls are passed without tools defined (edge cases)
         kwargs = {
             "model": self.model,
             "messages": messages,
         }
+
         if groq_tools:
             kwargs["tools"] = groq_tools
-            kwargs["tool_choice"] = "auto"
-            
+
         if llm_request.config:
             if llm_request.config.temperature is not None:
                 kwargs["temperature"] = llm_request.config.temperature
-            
+
             if llm_request.config.response_mime_type == "application/json":
-                # Groq supports json_object natively
                 kwargs["response_format"] = {"type": "json_object"}
-                # Groq requires the prompt to explicitly mention JSON when using json_object
-                messages.append({"role": "system", "content": "You MUST return the output in valid JSON format."})
+
+                messages.append({
+                    "role": "system",
+                    "content": "You MUST return the output in valid JSON format."
+                })
+
+        # Debug: print request
+        print("========== KWARGS ==========")
+        print(json.dumps(kwargs, indent=2, default=str))
+        print("============================")
 
         response = await client.chat.completions.create(**kwargs)
-        
-        # 4. Translate response to LlmResponse
+
+        # Translate response to LlmResponse
         choice = response.choices[0]
         msg = choice.message
-        
+
+        # Debug: print raw model response
+        print("\n========== GROQ RAW RESPONSE ==========\n")
+        print(msg.content)
+        print("\n=======================================\n")
+
         parts = []
+
         if msg.content:
-            parts.append(types.Part.from_text(text=msg.content))
-            
+            parts.append(
+                types.Part.from_text(text=msg.content)
+            )
+
         if msg.tool_calls:
             for tc in msg.tool_calls:
                 args = json.loads(tc.function.arguments)
-                parts.append(types.Part.from_function_call(name=tc.function.name, args=args))
-                
-        content_out = types.Content(role="model", parts=parts)
-        
-        yield LlmResponse(content=content_out)
 
+                parts.append(
+                    types.Part.from_function_call(
+                        name=tc.function.name,
+                        args=args,
+                    )
+                )
+
+        content_out = types.Content(
+            role="model",
+            parts=parts,
+        )
+
+        yield LlmResponse(
+            content=content_out
+        )

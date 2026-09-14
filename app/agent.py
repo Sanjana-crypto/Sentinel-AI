@@ -235,32 +235,77 @@ email_analyzer = Agent(
     name="email_analyzer",
     model=model,
     instruction="""
-    You are a Phishing Email Analyst.
-    Your task is to analyze the raw email input (headers and body) and produce a structured analysis.
-    
-    You must populate each field of the response schema:
-    1. Parse email headers:
-       - Extract the sender's address from the 'From' header (e.g. "From: Sender <sender@domain.com>").
-       - Extract the 'Reply-To' header if present (or "none"/"unknown" if not).
-       - Extract the 'Subject' header.
-    2. Check Authentication Results:
-       - Look for SPF, DKIM, and DMARC verification results in the raw input (often under "Authentication-Results" or mentioned in the text). Classify each as "pass", "fail", "softfail", "neutral", "none", or "unknown".
-    3. Detect urgency language patterns:
-       - Examine the tone of the subject and body for urgency, fear-inducing language, threat of account suspension, or immediate actions required. Set urgency_detected to true/false and provide urgency_justification.
-    4. Identify brand impersonation attempts:
-       - Determine if the sender/email body is pretending to be a known trusted brand (e.g., PayPal, Google, Bank of America, Netflix, UPS, etc.) but using a different sender domain or suspicious URLs. Set brand_impersonation_detected and impersonated_brand accordingly.
-    5. Extract all URLs from email body:
-       - Extract all URLs present in the email body text and list them.
-    6. Assign a confidence_score between 0.0 and 1.0 based on how clear and consistent the signals are.
-    7. Provide a concise detailed_summary of your findings.
-    
-    Refer to the orchestrator plan: {orchestrator_guidance}
-    Raw email/input: {raw_input}
-    """,
+You are a Cybersecurity Email Analyst.
+
+Analyze the email and return ONLY a valid JSON object.
+
+IMPORTANT RULES:
+- Return ONLY JSON.
+- Do NOT include markdown.
+- Do NOT include explanations.
+- Do NOT wrap the JSON inside ``` blocks.
+- Do NOT invent additional keys.
+- The JSON MUST exactly follow this schema.
+
+{
+  "headers": {
+    "sender": "string",
+    "reply_to": "string",
+    "subject": "string"
+  },
+  "authentication": {
+    "spf": "pass|fail|softfail|neutral|none|unknown",
+    "dkim": "pass|fail|none|unknown",
+    "dmarc": "pass|fail|none|unknown"
+  },
+  "urgency_detected": true,
+  "urgency_justification": "string",
+  "brand_impersonation_detected": true,
+  "impersonated_brand": "string",
+  "extracted_urls": [
+    "https://example.com"
+  ],
+  "confidence_score": 0.85,
+  "detailed_summary": "string"
+}
+
+DO NOT use these keys:
+- email_headers
+- authentication_results
+- sender_address
+- spf_verification
+- dkim_verification
+- dmarc_verification
+- urls
+
+Use ONLY:
+- headers
+- authentication
+- sender
+- reply_to
+- subject
+- spf
+- dkim
+- dmarc
+- urgency_detected
+- urgency_justification
+- brand_impersonation_detected
+- impersonated_brand
+- extracted_urls
+- confidence_score
+- detailed_summary
+
+Refer to:
+Orchestrator Plan:
+{orchestrator_guidance}
+
+Raw Email:
+{raw_input}
+""",
     output_schema=EmailAnalysis,
     output_key="email_analysis",
     on_model_error_callback=email_analyzer_error_handler,
-    after_model_callback=email_analyzer_after_model,
+    # after_model_callback=email_analyzer_after_model,
 )
 
 url_investigator = Agent(
