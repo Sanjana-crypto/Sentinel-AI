@@ -8,7 +8,7 @@ from google.genai import types
 load_dotenv(override=True)
 
 async def test():
-    model = GroqLLM(model="llama-3.3-70b-versatile")
+    model = GroqLLM(model=os.environ.get("GROQ_MODEL", "openai/gpt-oss-120b"))
     
     request = LlmRequest(
         model=model.model,

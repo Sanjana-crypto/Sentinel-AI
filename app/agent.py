@@ -200,7 +200,7 @@ os.environ["GOOGLE_GENAI_USE_VERTEXAI"] = "False"
 
 # Configure the LLM using Groq API
 model = GroqLLM(
-    model="llama-3.3-70b-versatile",
+    model=os.environ.get("GROQ_MODEL", "openai/gpt-oss-120b"),
 )
 
 
