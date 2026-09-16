@@ -345,14 +345,24 @@ def get_val(obj: Any, key: str, default: Any = None) -> Any:
 
 def parse_risk_level(threat_assessment: str, report: str) -> str:
     """Extract the threat risk score from assessment content."""
-    text = ((threat_assessment or "") + " " + (report or "")).lower()
-    if "critical" in text:
+    text = (threat_assessment or "") + " " + (report or "")
+
+    match = re.search(
+        r"Overall Threat Risk Level[:\s|]*\**\s*(Critical|High|Medium|Low)",
+        text,
+        re.IGNORECASE,
+    )
+    if match:
+        return match.group(1).upper()
+
+    text_lower = text.lower()
+    if "critical" in text_lower:
         return "CRITICAL"
-    elif "high" in text:
+    elif "high" in text_lower:
         return "HIGH"
-    elif "medium" in text:
+    elif "medium" in text_lower:
         return "MEDIUM"
-    elif "low" in text:
+    elif "low" in text_lower:
         return "LOW"
     return "UNKNOWN"
 
